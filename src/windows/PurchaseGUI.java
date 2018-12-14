@@ -4,7 +4,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
-import java.sql.*;
+
+import db.*;
 
 public class PurchaseGUI extends JFrame {
 
@@ -271,7 +272,7 @@ public class PurchaseGUI extends JFrame {
     }
     
     private void getPurchaseItems() {
-        
+
     }
     
     private void addPurchase() {

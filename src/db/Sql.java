@@ -1,8 +1,8 @@
 package db;
 
+import windows.*;
 import java.sql.ResultSet;
-
-// import net.proteanit.sql.DbUtils;
+import net.proteanit.sql.*;
 
 import java.sql.PreparedStatement;
 
@@ -81,7 +81,7 @@ public class Sql {
 			PreparedStatement pst = DbConnection.con.prepareStatement("select \"employeeID\", \"userName\" from userLogin");
 			ResultSet rs = pst.executeQuery();
 			AdminGUI.tblView.setModel(DbUtils.resultSetToTableModel(rs));
-			}catch(Exception e) {
+			} catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
 		DbConnection.disconnect();
@@ -91,9 +91,9 @@ public class Sql {
 		public static void getIngredients() {
 			DbConnection.connect();
 			try {
-				PreparedStatement pst = con.prepareStatement("select * from ingredient");
+				PreparedStatement pst = DbConnection.con.prepareStatement("select * from ingredient");
 				ResultSet rs = pst.executeQuery();
-				InventoryGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
+				IngredientGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
 				}catch(Exception e) {
 					System.out.println(e.getMessage());
 				}

@@ -5,28 +5,19 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import db.*;
+
 public class AdminGUI extends JFrame {
     
     Container cp;
     JPanel pView, pUpdate;
-    JTable tblView, tblUpdate;
+    public static JTable tblView, tblUpdate;
     TableModel tmView, tmUpdate;
     JScrollPane spView, spUpdate;
     JButton btnUpdate, btnSave;
     ButtonListener buttonListen;
     
     public AdminGUI() {
-
-        // ======================================================
-        //                         data
-        // ======================================================
-        
-        String[] columnNames = {"Employee No.","Username"};
-        String[] data[] = {{"0000001","admin1"},{"0000002","admin2"},
-        {"0000003","manager1"},{"0000004","manager2"},{"0000005","manager3"},
-        {"0000006","staff1"},{"0000007","staff2"},{"0000008","staff3"},
-        {"0000009","staff4"},{"0000010","staff5"},{"0000011","staff6"},
-        {"0000012","staff7"},{"0000013","staff8"},{"0000014","staff9"}};
 
         // ======================================================
         //                       buttons
@@ -49,19 +40,11 @@ public class AdminGUI extends JFrame {
         //                        tables
         // ======================================================
 
-        // table models
-        tmUpdate = new DefaultTableModel(data, columnNames) {};
-        tmView = new DefaultTableModel(data, columnNames) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
         // non-editable table
-        tblView = new JTable(tmView);
+        tblView = new JTable();
         
         // editable table
-        tblUpdate = new JTable(tmUpdate);
+        tblUpdate = new JTable();
 
         // put tables inside scroll panes (give them scroll bars)
         spView = new JScrollPane(tblView);
@@ -93,6 +76,7 @@ public class AdminGUI extends JFrame {
     // purchases list page
     private void openView() {
         switchPage();
+        Sql.getUsers();
         pView = new JPanel();
         pView.add(spView);
         pView.add(btnUpdate);
@@ -102,6 +86,7 @@ public class AdminGUI extends JFrame {
     // update purchase page
     private void openUpdate() {
         switchPage();
+        Sql.getUsers();
         pUpdate = new JPanel();
         pUpdate.add(spUpdate);
         pUpdate.add(btnSave);
@@ -133,20 +118,12 @@ public class AdminGUI extends JFrame {
         cp.revalidate();
         cp.repaint();
     }
-
-    // ======================================================
-    //                   database interaction
-    // ======================================================
     
-    private void getLoginUsers() {
-        // for making the table
-    }
-    
-    private void addUserLogin() {
+    private void addUser() {
 
     }
 
-    private void deleteUserLogin() {
+    private void deleteUser() {
 
     }
 }

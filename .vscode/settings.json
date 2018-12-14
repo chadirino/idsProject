@@ -1,7 +1,7 @@
 {
     "code-runner.executorMap": {
         "javascript": "node",
-        "java": "echo off\nset fileDir=$dir\nset fileDir=%fileDir:\"=%\njavac -d bin -cp bin %fileDir%*.java\nset class=%fileDir%$fileNameWithoutExt\nset class=%class:$workspaceRoot\\src\\=%\nset class=%class:\\=.%\njava -cp bin;bin\\sqlite-jdbc-3.23.1.jar %class%\necho on",
+        "java": "echo off\nset fileDir=$dir\nset fileDir=%fileDir:\"=%\njavac -d bin -cp bin %fileDir%*.java\nset class=%fileDir%$fileNameWithoutExt\nset class=%class:$workspaceRoot\\src\\=%\nset class=%class:\\=.%\njava -cp bin;bin/* %class%\necho on",
         "c": "cd $dir && gcc $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "cpp": "cd $dir && g++ $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
         "objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",

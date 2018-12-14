@@ -5,6 +5,8 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.*;
 
+import db.*;
+
 public class IngredientGUI extends JFrame {
 
     Container cp;
@@ -13,7 +15,7 @@ public class IngredientGUI extends JFrame {
     JMenuItem miView, miAdd, miUpdate, miSortDesc, miSortAsc, miLogout;
     JPanel pView, pAdd, pUpdate;
     JButton btnSave, btnCancel;
-    JTable tblEdit, tblNonEdit;
+    public static JTable tblEdit, tblNonEdit;
     JScrollPane spEdit, spNonEdit;
     TableModel tmNonEdit, tmEdit;
     MenuItemListener menuListen;
@@ -21,34 +23,11 @@ public class IngredientGUI extends JFrame {
     public IngredientGUI() {
         
         // ======================================================
-        //                         data
-        // ======================================================
-
-        String[] columnNames = {"#","Name","Unit","QOH"};
-        String[] data[] = {{"001","Salt","lbs","17","10"},
-        {"002","Pepper","lbs","14"},{"101","Chicken","lbs","24"},
-        {"102","Beef","lbs","30"},{"103","Pork","lbs","22"},
-        {"104","Lamb","lbs","15"},{"105","Goat","lbs","18"},
-        {"201","Rice","lbs","44"},{"202","Bread","lbs","14"},
-        {"203","Pasta","lbs","18"},{"301","Whole Milk","gal","16"},
-        {"302","Cheese","lbs","16"},{"303","Yogurt","lbs","20"},
-        {"304","Butter","lbs","16"},{"305","2% Milk","gal","12"},
-        {"","","",""}};
-       
-        // ======================================================
         //                        tables
         // ======================================================
 
-        // table models
-        tmEdit = new DefaultTableModel(data, columnNames) {};
-        tmNonEdit = new DefaultTableModel(data, columnNames) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
-
         // non-editable table for initial page
-        tblNonEdit = new JTable(tmNonEdit);
+        
         tblNonEdit.addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent event) {
                 JTable table =(JTable) event.getSource();
@@ -226,6 +205,10 @@ public class IngredientGUI extends JFrame {
         cp.repaint();
     }
 
+    private void getIngredients() {
+        
+    }
+    
     private void addIngredient() {
 
     }
