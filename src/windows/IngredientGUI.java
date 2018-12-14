@@ -27,30 +27,30 @@ public class IngredientGUI extends JFrame {
         // ======================================================
 
         // non-editable table for initial page
+        tblNonEdit = new JTable();
+        // tblNonEdit.addMouseListener(new MouseAdapter() {
+        //     public void mousePressed(MouseEvent event) {
+        //         JTable table =(JTable) event.getSource();
+        //         Point point = event.getPoint();
+        //         int row = table.rowAtPoint(point);
+        //         if (event.getClickCount() == 2 && table.getSelectedRow() != -1) {
+        //             System.out.print(row); 
+        //         }
+        //     }
+        // });
         
-        tblNonEdit.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent event) {
-                JTable table =(JTable) event.getSource();
-                Point point = event.getPoint();
-                int row = table.rowAtPoint(point);
-                if (event.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    System.out.print(row); 
-                }
-            }
-        });
-        
-        // editable table for update page
-        tblEdit = new JTable(tmEdit);
-        tblNonEdit.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent event) {
-                JTable table =(JTable) event.getSource();
-                Point point = event.getPoint();
-                int row = table.rowAtPoint(point);
-                if (event.getClickCount() == 2 && table.getSelectedRow() != -1) {
-                    System.out.print(row); 
-                }
-            }
-        });
+        // // editable table for update page
+        tblEdit = new JTable();
+        // tblEdit.addMouseListener(new MouseAdapter() {
+        //     public void mousePressed(MouseEvent event) {
+        //         JTable table =(JTable) event.getSource();
+        //         Point point = event.getPoint();
+        //         int row = table.rowAtPoint(point);
+        //         if (event.getClickCount() == 2 && table.getSelectedRow() != -1) {
+        //             System.out.print(row); 
+        //         }
+        //     }
+        // });
 
         // put tables inside scroll panes (give them scroll bars)
         spNonEdit = new JScrollPane(tblNonEdit);
@@ -145,6 +145,7 @@ public class IngredientGUI extends JFrame {
     // ingredient list page
     private void openView() {
         switchPage();
+        Sql.getIngredients();
         pView = new JPanel();
         pView.add(spNonEdit);
         cp.add(pView);
@@ -161,6 +162,7 @@ public class IngredientGUI extends JFrame {
     // ingredient update page
     private void openUpdate() {
         switchPage();
+        Sql.getIngredients();
         pUpdate = new JPanel();
         pUpdate.add(spEdit);
         cp.add(pUpdate);

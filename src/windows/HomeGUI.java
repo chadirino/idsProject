@@ -134,7 +134,7 @@ public class HomeGUI {
     }
 
     public static void main(String[] args) {
-        openUserHome();   
+        openUserHome();
     }
     
     // ======================================================

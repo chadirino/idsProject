@@ -85,20 +85,20 @@ public class Sql {
 				System.out.println(e.getMessage());
 			}
 		DbConnection.disconnect();
-		}
+	}
 	
 	//view list of inventory items
-		public static void getIngredients() {
-			DbConnection.connect();
-			try {
-				PreparedStatement pst = DbConnection.con.prepareStatement("select * from ingredient");
-				ResultSet rs = pst.executeQuery();
-				IngredientGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
-				}catch(Exception e) {
-					System.out.println(e.getMessage());
-				}
-			DbConnection.disconnect();
+	public static void getIngredients() {
+		DbConnection.connect();
+		try {
+			PreparedStatement pst = DbConnection.con.prepareStatement("select * from ingredient");
+			ResultSet rs = pst.executeQuery();
+			IngredientGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
 			}
+		DbConnection.disconnect();
+	}
 }
 
 
