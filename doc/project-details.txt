@@ -1,0 +1,28 @@
+ids 401 fall 2018 -- final project
+----------------------------------
+* members: claudia espinosa, nicolas donoso, omar salka, chad weaver
+* deadline: december 14
+
+
+overview
+--------
+* this program serves to automate the process of handling purchases 
+  and inventory for a ficitional restaurant called lambs-are-us
+* admins, managers, and staff members will be using the program
+    * admins can view/edit/add user logins
+    * managers can view/edit/add inventory and purchases
+    * staff members can view inventory and purchases
+* sqlite stores the data used in the program
+
+
+inventory management system
+---------------------------
+* tracks restaurant inventory
+* each inventory item is an ingredient
+
+
+purchase management system
+--------------------------
+* tracks restaurant purchases
+* each purchase contains purchas lines
+    * each purchase line contains one ingredient

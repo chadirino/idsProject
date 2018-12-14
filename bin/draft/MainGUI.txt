@@ -1,0 +1,77 @@
+package draft;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class MainGUI extends JFrame {
+	JPanel jp1;
+	JPanel jp2;
+	static JButton jb1;
+	static JButton jb2;
+	JPanel jp3;
+	
+	public MainGUI(){
+		
+		//Container
+		Container cp = getContentPane();
+		cp.setLayout(new BoxLayout(cp, BoxLayout.Y_AXIS));
+		
+		//Panels and their components
+		
+		//Panel 1
+		jp1 = new JPanel();
+		jp1.setPreferredSize(new Dimension(900,250));
+		
+		//Panel 2
+		jp2 = new JPanel();
+		jp2.setPreferredSize(new Dimension(900,250));
+		jp2.setBackground(Color.RED);
+		jp2.setLayout(new GridLayout(1, 2));
+			//Mgmt Inventory Sys Button
+			jb1 = new JButton("Inventory Management System");
+			jb1.setPreferredSize(new Dimension(250,100));
+			//ActionListener
+			ActionListener1 al1 = new ActionListener1();
+			jb1.addActionListener(al1);
+			
+			//Menu Button
+			jb2 = new JButton("Menu");
+			jb2.setPreferredSize(new Dimension(250,100));
+
+		//Panel 3
+		jp3 = new JPanel();
+		jp3.setPreferredSize(new Dimension(900,250));
+		
+		//add section
+		cp.add(jp1);
+		cp.add(jp2);
+			jp2.add(jb1);
+			jp2.add(jb2);
+		cp.add(jp3);
+
+		//main GUI controls
+		pack();
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
+	}
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new MainGUI();
+	}
+}
+
+class ActionListener1 implements ActionListener{
+	public void actionPerformed(ActionEvent e) {
+		//Calls Mgmt Inventory Sys GUI
+		if(e.getSource() == MainGUI.jb1) {
+			Mgmt_Inv_Sys mis = new 	Mgmt_Inv_Sys();
+		}
+		//Calls Menu GUI
+		if(e.getSource() == MainGUI.jb2) {
+			
+		}
+	}
+}

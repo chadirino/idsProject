@@ -1,0 +1,123 @@
+//I created a class called "customer" that connects to the Apache derby database schema (called test_schema)
+//and allows you to insert new data into the customer table. The customer table from the test_schema is composed of only 3 fields.
+//Note: Make sure to configure a path to add the derby.jar!
+
+
+
+package myApplication;
+//SQL libraries
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.ResultSetMetaData;
+
+
+
+public class customer {
+   
+    //Setting variable to the location of the embedded server
+	  private static String dbURL = "jdbc:derby:C:\\Users\\Niko\\MyDB;create=true;user=test;password=test";
+    //Setting variable name for database table
+    private static String tableName = "test_schema.customer";
+    
+    // JDBC Connection
+    private static Connection conn = null;
+    private static Statement stmt = null;
+
+    
+    public static void main(String[] args)
+    {
+        createConnection();
+        insertCustomer(2, "Dunkin", "Donuts");
+        selectCustomer();
+        shutdown();
+    }
+    
+    //Method to create the connection
+    private static void createConnection()
+    {
+        try
+        {
+           //Derby Embedded Driver
+        	Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            //Get a connection
+            conn = DriverManager.getConnection(dbURL); 
+        }
+        catch (Exception except)
+        {
+            except.printStackTrace();
+        
+    }
+    
+    //Method to insert data into customer table
+    private static void insertCustomer(int CustomerID, String firstName, String lastName)
+    {
+        try
+        {
+            stmt = conn.createStatement();
+            stmt.execute("insert into " + tableName + " values (" +
+                    CustomerID + ",'" + firstName + "','" + lastName +"')");
+            stmt.close();
+        }
+        catch (SQLException sqlExcept)
+        {
+            sqlExcept.printStackTrace();
+        }
+    }
+    
+    //Method to read and print data from table 
+    private static void selectCustomer()
+    {
+        try
+        {
+            stmt = conn.createStatement();
+            ResultSet results = stmt.executeQuery("select * from " + tableName);
+            ResultSetMetaData rsmd = results.getMetaData();
+            int numberCols = rsmd.getColumnCount();
+            for (int i=1; i<=numberCols; i++)
+            {
+                //print Column Names
+                System.out.print(rsmd.getColumnLabel(i)+"\t\t");  
+            }
+
+            System.out.println("\n-------------------------------------------------");
+
+            while(results.next())
+            {
+                int CustomerID = results.getInt(1);
+                String firstName = results.getString(2);
+                String lastName = results.getString(3);
+                System.out.println(CustomerID + "\t\t" + firstName + "\t\t" + lastName);
+            }
+            results.close();
+            stmt.close();
+        }
+        catch (SQLException sqlExcept)
+        {
+            sqlExcept.printStackTrace();
+        }
+    }
+    
+    private static void shutdown()
+    {
+        try
+        {
+            if (stmt != null)
+            {
+                stmt.close();
+            }
+            if (conn != null)
+            {
+                DriverManager.getConnection(dbURL + ";shutdown=true");
+                conn.close();
+            }           
+        }
+        catch (SQLException sqlExcept)
+        {
+            
+        }
+
+    }
+}

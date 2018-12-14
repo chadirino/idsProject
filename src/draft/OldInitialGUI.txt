@@ -1,0 +1,80 @@
+// initial gui
+// user chooses to open either menu or invetory system
+
+package draft;
+
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+public class OldInitialGUI extends JFrame {
+    
+    Container cp;
+    JPanel pHome;
+    JButton btnMenu, btnInv, btnHome;
+    ActionListenerMain buttonListen;
+
+    public OldInitialGUI() {
+
+        // ======================================================
+        //                        buttons
+        // ======================================================
+
+        // action listener for buttons
+        buttonListen = new ActionListenerMain();
+        
+        // button to open menu system
+        btnMenu = new JButton("Menu System");
+        btnMenu.setPreferredSize(new Dimension(200, 80));
+        btnMenu.addActionListener(buttonListen);
+
+        // button to open inventory system
+        btnInv = new JButton("Inventory System");
+        btnInv.setPreferredSize(new Dimension(200, 80));
+        btnInv.addActionListener(buttonListen);
+
+        // ======================================================
+        //                         panel
+        // ====================================================== 
+        
+        // content pane
+        cp = getContentPane();
+        
+        // panel
+        pHome = new JPanel();
+        pHome.add(btnMenu);
+        pHome.add(btnInv);
+        cp.add(pHome);
+
+        // ======================================================
+        //                         window
+        // ======================================================
+
+        setTitle("Lambs-R-Us");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
+        setSize(435,125);
+        setLocationRelativeTo(null);
+        setVisible(true);
+    }
+    
+    // main method
+    public static void main(String[] args) {
+        new InitialGUI();
+    }
+
+    // ======================================================
+    //                     event handler
+    // ======================================================
+    
+    class ActionListenerMain implements ActionListener {
+		public void actionPerformed(ActionEvent event) {
+            if (event.getSource() == btnMenu) {
+                dispose();
+                new MenuGUI();
+            } else if (event.getSource() == btnInv) {
+                dispose();
+                new InventoryGUI();
+            } 
+        }
+    }
+}

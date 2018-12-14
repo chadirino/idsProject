@@ -1,0 +1,31 @@
+================================================================
+---------------------- TO-DO TASK LIST -------------------------
+================================================================
+
+- modify database
+    - employee (exists)
+    - ingredient (exists)
+    - purchase (does not exist)
+    - purchaseItem (does not exist)
+    - userLogin (exits)
+    - adminLogin (exists)
+    - editLog (will create later)
+- create sql methods for interacting with db 
+- sort methods for tables
+- add left click feature when clicking inventory or purchase 
+  line (ex: delete/edit/purchaseline options)
+- modify purchase line view -- maybe pop up dialog or make 
+  title the specific purchase info
+- add more shorcut keys
+- add report (view/print/save) option
+- add undo option
+- program only used on one computer? (asking because of db)
+- figure out way to backup data/database effectively, maybe 
+  backup after each design change or instead routine backup 
+- add transaction logging logic to sql statements
+- check scope of classes/variables
+- if time make manager/staff window different to add option
+  for managers to manage employees
+- create icon for program windows (default is java icon)
+
+================================================================

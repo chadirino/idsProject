@@ -1,0 +1,25 @@
+final project instructions - ids 401 fall 2018
+-----------------------------------------------------------------------------------------------------
+
+You can only learn programming through coding by yourself. That is why I emphasize a lot on
+the final project. The deliverables of the corporate project include a project report, java code plus
+a class presentation.  The presentation constitutes 20% of the grade and project report and java
+code deliverable 80%.  The presentation is graded on the basis of content, structure, design, and
+delivery.  By content we mean that the students have been able to include all the necessary pieces
+of information needed to achieve the objective.  By structure we mean that the students have
+included in the presentation introductory, main body, and conclusion slides which follow each
+other in logical succession.  By design we mean that the students have been able to use layouts,
+graphics, charts, videos, and other visual aids effectively and which enhance the understanding of
+the topic presented.  Finally, for delivery, students are graded for posture, voice intonation, body
+language, and other speech effects to capture their audience’s attention.  The second deliverable
+of the project, the project report and java code, is graded for completeness (whether this
+application achieve the goal you claim).
+
+In addition, to help you make progress on course project, we will also have a project
+preview. While I will not grade project preview, you are expected to present the general idea of
+your project: what is the objective of this project, why it is important, how do you plan to
+approach this objective. Details of project preview will be available when the date approaches.
+Each team is expected to have around three members. You should start forming your
+team and work on the project as soon as possible to make sure you have enough time for the final
+project. Notice that if any one of the team members requests a peer evaluation within the
+team, I will conduct the evaluation and adjust the project grade accordingly.
