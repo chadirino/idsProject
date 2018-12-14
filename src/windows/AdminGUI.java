@@ -109,7 +109,6 @@ public class AdminGUI extends JFrame {
     }
     
     public static void main(String[] args) {
-        
         new AdminGUI();
     }
 
@@ -128,14 +127,26 @@ public class AdminGUI extends JFrame {
         }
     }
 
-    // ======================================================
-    //                      misc methods
-    // ======================================================
-
     // method to wipe content pane (for switching panels)
     private void switchPage() {
         cp.removeAll();
         cp.revalidate();
         cp.repaint();
+    }
+
+    // ======================================================
+    //                   database interaction
+    // ======================================================
+    
+    private void getLoginUsers() {
+        // for making the table
+    }
+    
+    private void addUserLogin() {
+
+    }
+
+    private void deleteUserLogin() {
+
     }
 }

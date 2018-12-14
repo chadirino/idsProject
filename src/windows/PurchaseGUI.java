@@ -265,4 +265,16 @@ public class PurchaseGUI extends JFrame {
         cp.revalidate();
         cp.repaint();
     }
+
+    private void getPurchases() {
+        // for making table maybe output array of records
+    }
+    
+    private void getPurchaseItems() {
+        
+    }
+    
+    private void addPurchase() {
+
+    }
 }

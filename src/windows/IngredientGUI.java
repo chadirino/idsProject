@@ -225,4 +225,16 @@ public class IngredientGUI extends JFrame {
         cp.revalidate();
         cp.repaint();
     }
+
+    private void addIngredient() {
+
+    }
+
+    private void deleteIngredient() {
+
+    }
+
+    private void updateQty() {
+
+    }
 }
