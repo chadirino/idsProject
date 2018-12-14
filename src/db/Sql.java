@@ -73,6 +73,19 @@ public class Sql {
 		DbConnection.connect();
 		DbConnection.disconnect();
 	}
+	
+	//view users list
+	public static void getUsers() {
+		DbConnection.connect();
+		try {
+			PreparedStatement pst = DbConnection.con.prepareStatement("select \"employeeID\", \"userName\" from userLogin");
+			ResultSet rs = pst.executeQuery();
+			AdminGUI.tblView.setModel(DbUtils.resultSetToTableModel(rs));
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		DbConnection.disconnect();
+		}
 }
 
 
