@@ -7,17 +7,19 @@ import javax.swing.table.*;
 
 import db.*;
 
-public class PurchaseGUI extends JFrame {
+public class PurchaseGUI {
 
     Container cp;
+    JFrame fView, fDateRange;
     JMenuBar menuBar;
     JMenu menu, subSort;
     JMenuItem miView, miAdd, miUpdate, miSortNew, miSortOld, miDate, miLogout;
-    JPanel pView, pAdd, pUpdate, pLineView, pLineAdd, pLineUpdate;
-    JButton btnSave, btnCancel, btnSearch, btnFilter, btnBack;
-    JLabel lblSearch;
-    JTextField tfSearch;
-    String inputSearch;
+    JPanel pView, pAdd, pDateRange, pUpdate, pLineView, pLineAdd, pLineUpdate;
+    JDialog dlgDateRange;
+    JButton btnSave, btnCancel, btnSearch, btnFilter, btnBack, btnDateRangeOK, btnDateRangeCancel;
+    JLabel lblSearch, lblDateTo, lblDateFrom;
+    JTextField tfSearch, tfDateTo, tfDateFrom;
+    String inputSearch, inputDateFrom, inputDateTo;
     public static JTable tblEdit, tblNonEdit;
     JScrollPane spEdit, spNonEdit;
     TableModel tmNonEdit, tmEdit;
@@ -46,6 +48,9 @@ public class PurchaseGUI extends JFrame {
         // button to go back from purchase line window to purchases window
         btnBack = new JButton("Back");
 
+        btnDateRangeOK = new JButton("OK");
+        btnDateRangeCancel = new JButton("Cancel");
+
         // action listener for buttons
         buttonListen = new ButtonListener();
 
@@ -54,24 +59,16 @@ public class PurchaseGUI extends JFrame {
         btnSave.addActionListener(buttonListen);
         btnCancel.addActionListener(buttonListen);
         btnBack.addActionListener(buttonListen);
+        btnDateRangeOK.addActionListener(buttonListen);
+        btnDateRangeCancel.addActionListener(buttonListen);
 
-        // ======================================================
-        //                         data
-        // ======================================================
-
-        // data for purchases list
-        String[] columnNames = {"Order No.","Employee","Amount", "Date"};
-        String[] data[] = {{"10001","Claudia E.","$93.62","12/01/18"},{"10002","Claudia E.","$87.21","11/28/18"}};
-
-        // data for puchase lines list
-        
-       
         // ======================================================
         //                        tables
         // ======================================================
         
         // non-editable table for initial page
         tblNonEdit = new JTable();
+        
         
         // editable table for update page
         tblEdit = new JTable();
@@ -88,6 +85,12 @@ public class PurchaseGUI extends JFrame {
 
         lblSearch = new JLabel("Order No:");
         tfSearch = new JTextField(12);
+
+        lblDateFrom = new JLabel("From: ");
+        lblDateTo = new JLabel("To: ");
+
+        tfDateFrom = new JTextField(10);
+        tfDateTo = new JTextField(10);
 
         // ======================================================
         //                          menu
@@ -143,27 +146,61 @@ public class PurchaseGUI extends JFrame {
         menuBar.add(menu);
         
         // ======================================================
-        //                         window
+        //                        panels
         // ======================================================
-        
-        // content pane
-        cp = getContentPane();
 
-        addWindowListener(new WindowAdapter() {
+        // view
+        pView = new JPanel();
+        pView.add(lblSearch);
+        pView.add(tfSearch);
+        pView.add(btnSearch);
+        pView.add(spNonEdit);
+        
+        // date range
+        pDateRange = new JPanel();
+        pDateRange.add(lblDateFrom);
+        pDateRange.add(tfDateFrom);
+        pDateRange.add(lblDateTo);
+        pDateRange.add(tfDateTo);
+        pDateRange.add(btnDateRangeOK);
+        pDateRange.add(btnDateRangeCancel);
+
+        // ======================================================
+        //                    frames/dialogs
+        // ======================================================
+
+        // -------------------- view frame ----------------------
+        
+        fView = new JFrame();
+        fView.add(pView);
+        fView.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent event) {
-                // ConnectDB.disconnect();
-                dispose(); 
+                fView.dispose(); 
             }
         });
+        fView.setTitle("Purchases Manager");
+        fView.setJMenuBar(menuBar);
+        fView.setSize(450,325);
+        fView.setLocationRelativeTo(null);
+        
 
-        setTitle("Purchases Manager");
-        setJMenuBar(menuBar);
-        setSize(450,325);
-        setLocationRelativeTo(null);
-        setVisible(true);
+        // ----------------- data range dialog ------------------
+
+        fDateRange = new JFrame();
+        dlgDateRange = new JDialog(fDateRange);
+        dlgDateRange.add(pDateRange);
+        dlgDateRange.getRootPane().setDefaultButton(btnDateRangeOK);
+        dlgDateRange.setTitle("Date Range");
+        dlgDateRange.addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent event) {
+                fDateRange.dispose(); 
+            }
+        });
+        dlgDateRange.setSize(300,200);
+        dlgDateRange.setLocationRelativeTo(null);
 
         // open initial page
-        openView(); 
+        openViewWindow(); 
     }
 
     // ======================================================
@@ -177,18 +214,6 @@ public class PurchaseGUI extends JFrame {
     // ======================================================
     //                         panels
     // ======================================================
-    
-    // purchases list page
-    private void openView() {
-        switchPage();
-        Sql.getPurchases();
-        pView = new JPanel();
-        pView.add(lblSearch);
-        pView.add(tfSearch);
-        pView.add(btnSearch);
-        pView.add(spNonEdit);
-        cp.add(pView);
-    }
 
     // add purchase page
     private void openAdd() {
@@ -218,9 +243,13 @@ public class PurchaseGUI extends JFrame {
                 // search and focus on cell
             } else if (event.getSource() == btnSave) {
                 // save update
-                openView();
+                openViewWindow();
             } else if (event.getSource() == btnCancel) {
-                openView();
+                openViewWindow();
+            } else if (event.getSource() == btnDateRangeOK) {
+                setDateRange();
+            } else if (event.getSource() == btnDateRangeCancel) {
+                fDateRange.dispose();
             }
         }
     }
@@ -229,7 +258,7 @@ public class PurchaseGUI extends JFrame {
     private class MenuItemListener implements ActionListener {
         public void actionPerformed(ActionEvent event) {
             if (event.getSource() == miView) {
-                openView(); 
+                openViewWindow(); 
             } else if (event.getSource() == miAdd) {
                 openAdd(); 
             } else if (event.getSource() == miUpdate) {
@@ -239,13 +268,13 @@ public class PurchaseGUI extends JFrame {
             } else if (event.getSource() == miSortOld) {
                 // sort oldest first
             } else if (event.getSource() == miDate) {
-                // open dialog to set time frame
+                openSetRangeDialog();
             } else if (event.getSource() == btnBack) {
-                openView();
+                openViewWindow();
             } else if (event.getSource() == miLogout) {
-                dispose();
+                fView.dispose();
                 new LoginGUI();
-            }
+            } 
         }
     }
 
@@ -260,6 +289,22 @@ public class PurchaseGUI extends JFrame {
         cp.repaint();
     }
 
+    private void openSetRangeDialog() {
+        dlgDateRange.setVisible(true);
+    }
+
+    private void openViewWindow() {
+        Sql.getPurchases();
+        fView.setVisible(true);
+    }
+    
+    private void setDateRange() {
+        inputDateFrom = tfDateFrom.getText();
+        inputDateTo = tfDateTo.getText();
+
+        Sql.setDateRange(inputDateFrom, inputDateTo);
+    }
+    
     private void getPurchases() {
         // for making table maybe output array of records
     }

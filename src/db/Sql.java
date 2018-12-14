@@ -1,7 +1,7 @@
 package db;
 
+import java.sql.*;
 import windows.*;
-import java.sql.ResultSet;
 import net.proteanit.sql.*;
 
 import java.sql.PreparedStatement;
@@ -113,11 +113,12 @@ public class Sql {
 		DbConnection.disconnect();
 	}
 	// sort by date
-	    public static void setDateRange(Date date1, Date date2) {
+	    public static void setDateRange(String date1, String date2) {
 	    	DbConnection.connect();
 	    	try {
-			PreparedStatement pst = DbConnection.con.prepareStatement("Select * from purchase where date > \"" + date1 + "\" and date < \"" + date2 + "\"");
-			pst.executeUpdate();
+			PreparedStatement pst = DbConnection.con.prepareStatement("Select * from purchase where date >= \"" + date1 + "\" and date <= \"" + date2 + "\"");
+			ResultSet rs = pst.executeQuery();
+			PurchaseGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
