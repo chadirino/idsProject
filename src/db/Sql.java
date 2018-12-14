@@ -99,6 +99,19 @@ public class Sql {
 			}
 		DbConnection.disconnect();
 	}
+
+	//view list of inventory items
+	public static void getPurchases() {
+		DbConnection.connect();
+		try {
+			PreparedStatement pst = DbConnection.con.prepareStatement("select * from purchase");
+			ResultSet rs = pst.executeQuery();
+			PurchaseGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
+			}catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+		DbConnection.disconnect();
+	}
 }
 
 

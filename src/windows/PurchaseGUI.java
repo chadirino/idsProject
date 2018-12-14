@@ -18,7 +18,7 @@ public class PurchaseGUI extends JFrame {
     JLabel lblSearch;
     JTextField tfSearch;
     String inputSearch;
-    JTable tblEdit, tblNonEdit;
+    public static JTable tblEdit, tblNonEdit;
     JScrollPane spEdit, spNonEdit;
     TableModel tmNonEdit, tmEdit;
     MenuItemListener menuListen;
@@ -69,20 +69,12 @@ public class PurchaseGUI extends JFrame {
         // ======================================================
         //                        tables
         // ======================================================
-
-        // table models
-        tmEdit = new DefaultTableModel(data, columnNames) {};
-        tmNonEdit = new DefaultTableModel(data, columnNames) {
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
         
         // non-editable table for initial page
-        tblNonEdit = new JTable(tmNonEdit);
+        tblNonEdit = new JTable();
         
         // editable table for update page
-        tblEdit = new JTable(tmEdit);
+        tblEdit = new JTable();
 
         // put tables inside scroll panes (give them scroll bars)
         spNonEdit = new JScrollPane(tblNonEdit);
@@ -189,6 +181,7 @@ public class PurchaseGUI extends JFrame {
     // purchases list page
     private void openView() {
         switchPage();
+        Sql.getPurchases();
         pView = new JPanel();
         pView.add(lblSearch);
         pView.add(tfSearch);

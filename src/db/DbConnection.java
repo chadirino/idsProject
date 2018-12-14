@@ -15,7 +15,7 @@ public class DbConnection {
     public static void main(String[] args) {
         connect();
         disconnect();
-    }
+    } 
 
     // establish connection
     public static void connect() {
