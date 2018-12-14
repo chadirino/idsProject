@@ -112,6 +112,17 @@ public class Sql {
 			}
 		DbConnection.disconnect();
 	}
+	// sort by date
+	    public static void setDateRange(Date date1, Date date2) {
+	    	DbConnection.connect();
+	    	try {
+			PreparedStatement pst = DbConnection.con.prepareStatement("Select * from purchase where date > \"" + date1 + "\" and date < \"" + date2 + "\"");
+			pst.executeUpdate();
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			DbConnection.disconnect();
+	    }
 }
 
 
