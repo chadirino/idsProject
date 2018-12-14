@@ -123,6 +123,31 @@ public class Sql {
 			}
 			DbConnection.disconnect();
 	    }
+	
+	// sort by date in ascending order
+	    public static void sortAscending() {
+	    	DbConnection.connect();
+	    	try {
+			PreparedStatement pst = DbConnection.con.prepareStatement("Select * from purchase order by date");
+			pst.executeUpdate();
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			DbConnection.disconnect();
+	    }
+	    
+	 // sort by date in descending order
+	    public static void sortDescending() {
+	    	DbConnection.connect();
+	    	try {
+			PreparedStatement pst = DbConnection.con.prepareStatement("Select * from purchase order by date desc");
+			pst.executeUpdate();
+			} catch(Exception e) {
+				System.out.println(e.getMessage());
+			}
+			DbConnection.disconnect();
+	    }
+	    
 }
 
 
