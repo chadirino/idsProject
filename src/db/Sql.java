@@ -86,6 +86,19 @@ public class Sql {
 			}
 		DbConnection.disconnect();
 		}
+	
+	//view list of inventory items
+		public static void getIngredients() {
+			DbConnection.connect();
+			try {
+				PreparedStatement pst = con.prepareStatement("select * from ingredient");
+				ResultSet rs = pst.executeQuery();
+				InventoryGUI.tblNonEdit.setModel(DbUtils.resultSetToTableModel(rs));
+				}catch(Exception e) {
+					System.out.println(e.getMessage());
+				}
+			DbConnection.disconnect();
+			}
 }
 
 
